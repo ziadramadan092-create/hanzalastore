@@ -37,7 +37,7 @@ async function cloudToken() {
 const STORE = { name: 'حنظلة ستور', nameEn: 'Hanzala Store', whatsapp: '201151255473', phone: '', address: '', facebook: '', instagram: '' };
 
 // الشحن والكوبونات الافتراضية (تتعدل من لوحة الإدارة ← الإعدادات)
-const DEFAULT_SETTINGS = { free: 0, bqty: 0, bpct: 0, fb: '', tt: '', ig: '', wg: '', tg: '', coupons: '', ship: 'القاهرة=50\nالجيزة=50\nالقليوبية=55\nالإسكندرية=60\nالدقهلية=60\nالشرقية=60\nالغربية=60\nالمنوفية=60\nكفر الشيخ=65\nالبحيرة=65\nدمياط=65\nبورسعيد=70\nالإسماعيلية=70\nالسويس=70\nالفيوم=65\nبني سويف=70\nالمنيا=75\nأسيوط=80\nسوهاج=80\nقنا=85\nالأقصر=85\nأسوان=90\nالبحر الأحمر=95\nمطروح=95\nشمال سيناء=100\nجنوب سيناء=100\nالوادي الجديد=100' };
+const DEFAULT_SETTINGS = { free: 0, bqty: 0, bpct: 0, fb: '', tt: '', ig: '', wg: '', tg: '', vc: '', ip: '', wcode: '', wmsg: '', bar: '', barEnd: 0, black: '', courier: 0, ads: 0, coupons: '', ship: 'القاهرة=50\nالجيزة=50\nالقليوبية=55\nالإسكندرية=60\nالدقهلية=60\nالشرقية=60\nالغربية=60\nالمنوفية=60\nكفر الشيخ=65\nالبحيرة=65\nدمياط=65\nبورسعيد=70\nالإسماعيلية=70\nالسويس=70\nالفيوم=65\nبني سويف=70\nالمنيا=75\nأسيوط=80\nسوهاج=80\nقنا=85\nالأقصر=85\nأسوان=90\nالبحر الأحمر=95\nمطروح=95\nشمال سيناء=100\nجنوب سيناء=100\nالوادي الجديد=100' };
 const parseKV = t => Object.fromEntries(String(t || '').split('\n').map(l => l.split('=').map(x => x.trim())).filter(a => a[0] && a[1]));
 function getSettings() { try { return { ...DEFAULT_SETTINGS, ...JSON.parse(localStorage.getItem('hanzal_settings') || '{}') }; } catch (e) { return { ...DEFAULT_SETTINGS }; } }
 
