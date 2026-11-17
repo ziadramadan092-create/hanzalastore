@@ -34,7 +34,7 @@ async function cloudToken() {
 }
 
 // ===== بيانات المتجر (عدّلها لتناسبك) =====
-const STORE = { name: 'حنظلة ستور', nameEn: 'Hanzala Store', whatsapp: '201151255473', phone: '', address: '', facebook: '', instagram: '' };
+const STORE = { name: 'حنظلة ستور', nameEn: 'Hanzala Store', autoWA: true, whatsapp: '201151255473', phone: '', address: '', facebook: '', instagram: '' };
 
 // الشحن والكوبونات الافتراضية (تتعدل من لوحة الإدارة ← الإعدادات)
 const DEFAULT_SETTINGS = { free: 0, bqty: 0, bpct: 0, fb: '', tt: '', ig: '', wg: '', tg: '', vc: '', ip: '', wcode: '', wmsg: '', bar: '', barEnd: 0, black: '', courier: 0, ads: 0, coupons: '', ship: 'القاهرة=50\nالجيزة=50\nالقليوبية=55\nالإسكندرية=60\nالدقهلية=60\nالشرقية=60\nالغربية=60\nالمنوفية=60\nكفر الشيخ=65\nالبحيرة=65\nدمياط=65\nبورسعيد=70\nالإسماعيلية=70\nالسويس=70\nالفيوم=65\nبني سويف=70\nالمنيا=75\nأسيوط=80\nسوهاج=80\nقنا=85\nالأقصر=85\nأسوان=90\nالبحر الأحمر=95\nمطروح=95\nشمال سيناء=100\nجنوب سيناء=100\nالوادي الجديد=100' };
@@ -83,3 +83,6 @@ function logVisit(kind, extra) {
 if (!/admin|login/.test(location.pathname) && !sessionStorage.getItem('hz_s')) { sessionStorage.setItem('hz_s', '1'); logVisit('visit'); }
 
 PAGES.privacy = { t: 'سياسة الخصوصية', b: '<p>نجمع بيانات زيارة مجهولة الهوية (نوع الجهاز، مصدر الزيارة، والصفحات والمنتجات التي شاهدتها) لتحسين الموقع والخدمة.</p><p>لا نسجّل اسمك أو رقمك أو عنوانك إلا عند إتمام الطلب، ونستخدمها لتجهيز الطلب وشحنه فقط.</p><p>لا نبيع بياناتك لأي طرف.</p>' };
+
+// تصغير صور Cloudinary تلقائياً حسب العرض المطلوب (لا يغيّر الروابط الأخرى)
+const optImg = (u, w) => (typeof u === 'string' && u.includes('res.cloudinary.com') && u.includes('/upload/') && !/\/upload\/[a-z]+_/.test(u)) ? u.replace('/upload/', '/upload/f_auto,q_auto,w_' + w + '/') : u;
