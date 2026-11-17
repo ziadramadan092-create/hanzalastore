@@ -7,10 +7,10 @@
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <script>if (localStorage.getItem('hanzal_is_logged_in') !== 'true') location.replace('login.html');</script>
     <script src="cloud.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="tailwind.css" onerror="var s=document.createElement('script');s.src='https://cdn.tailwindcss.com';document.head.appendChild(s)">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <style>body{font-family:'Cairo',sans-serif}
 @media(max-width:767px){input,select,textarea{font-size:16px!important}}
 @media(min-width:768px){main{display:grid!important;grid-template-columns:220px 1fr;gap:1rem;align-items:start;max-width:80rem!important}main>*{margin-top:0!important}
@@ -470,7 +470,7 @@ async function cuDel(uid) {
         if (ps.length < all.length) alert('بعض المنتجات صورتها محفوظة داخل القاعدة فاتشالت من الكتالوج. انقلها إلى Cloudinary الأول.');
     };
     function flags() {
-        const bl = getSettings().black.split('\n').map(nph).filter(Boolean);
+        const bl = (getSettings().black || '').split('\n').map(nph).filter(Boolean);
         [...g('oList').children].forEach((c, i) => {
             const o = O[i]; if (!o || !c.firstElementChild || !c.firstElementChild.firstElementChild) return;
             const k = nph(o.phone), same = O.filter((x, j) => j !== i && nph(x.phone) === k), f = [];
@@ -539,6 +539,29 @@ async function cuDel(uid) {
     };
     window.exportLeads = () => csv2([['الهاتف', 'التاريخ']].concat((window._leads || []).map(r => [r.ph, new Date(r.t).toLocaleDateString('en-GB')])), 'leads.csv');
     loadNotify(); loadLeads(); if (cloudOn()) setInterval(() => { loadNotify(); loadLeads(); }, 90000);
+})();
+
+// ===== إضافات 13: ضغط الصور قبل الرفع =====
+(function () {
+    function compress(file, maxW = 1000, q = .78) {
+        return new Promise((ok, no) => {
+            const im = new Image(), u = URL.createObjectURL(file);
+            im.onload = () => { const k = Math.min(1, maxW / im.width), c = document.createElement('canvas'); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(u); c.toBlob(b => b ? ok(b) : no(new Error('compress')), 'image/jpeg', q); };
+            im.onerror = () => no(new Error('image')); im.src = u;
+        });
+    }
+    const send = async file => {
+        const fd = new FormData(); fd.append('file', await compress(file), 'image.jpg'); fd.append('upload_preset', CLOUDINARY.preset);
+        const r = await fetch('https://api.cloudinary.com/v1_1/' + CLOUDINARY.cloud + '/image/upload', { method: 'POST', body: fd }), d = await r.json();
+        if (!d.secure_url) throw new Error((d.error && d.error.message) || 'upload'); return cdOpt(d.secure_url);
+    };
+    cdUpload = send;
+    const _uiC = upImg;
+    upImg = function (inp) {
+        if (!(CLOUDINARY.cloud && CLOUDINARY.preset)) return _uiC(inp);
+        const fl = inp.files[0]; if (!fl) return; g('pImg').value = 'جارٍ الضغط والرفع...';
+        send(fl).then(u => { g('pImg').value = u; }).catch(e => { g('pImg').value = ''; alert('فشل رفع الصورة: ' + e.message); });
+    };
 })();
 tab('dash');
 </script>
