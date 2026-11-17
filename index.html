@@ -6,6 +6,7 @@
     <meta name="description" content="حنظلة ستور - ساعات ذكية وسماعات وشواحن أصلية، توصيل لكل محافظات مصر والدفع عند الاستلام">
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="manifest" href="manifest.json">
+    <meta property="og:type" content="website"><meta property="og:title" content="حنظلة ستور | Hanzala Store"><meta property="og:description" content="إكسسوارات الموبايل والساعات الذكية - توصيل لكل المحافظات والدفع عند الاستلام"><meta property="og:image" content="https://hanzalastore.netlify.app/logo-512.png">
     <meta name="theme-color" content="#4338ca">
     <link rel="apple-touch-icon" href="logo-192.png">
     <title>حنظلة ستور | Hanzala Store - ساعات ذكية وسماعات وإكسسوارات</title>
@@ -131,6 +132,10 @@
         #catMenu { position: absolute; inset-inline-start: 1rem; top: calc(100% - .25rem); width: min(19rem, calc(100vw - 2rem)); }
         #catGrid { padding: .5rem !important; gap: .35rem !important; }
         @media (min-width: 1100px) { header > div > div:first-child > div { position: absolute; left: 50%; transform: translateX(-50%); flex: none; } }
+            /* ===== اسم المتجر أكبر (بدون الجملة التعريفية) ===== */
+        header h1 { font-size: 1.6rem !important; line-height: 1.2 !important; }
+        header h1 + div { font-size: .78rem !important; }
+        @media (max-width: 639px) { header h1 { font-size: 1.2rem !important; } header h1 + div { font-size: .62rem !important; } }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
@@ -147,7 +152,6 @@
             <div class="flex items-center gap-3">
                 <div>
                     <h1 class="text-xl font-black text-slate-900 tracking-tight">حنظلة ستور</h1><div class="text-[10px] font-bold tracking-[.25em] text-indigo-600 uppercase leading-none mb-1">Hanzala Store</div>
-                    <p class="text-xs text-slate-500 font-medium">إكسسوارات الموبايل والساعات الذكية</p>
                 </div>
             </div>
 
@@ -613,7 +617,7 @@
             [...g('productsGrid').children].forEach((c, i) => {
                 const p = items[i]; if (!p) return;
                 const im = c.querySelector('img');
-                if (im) im.onerror = function () { this.onerror = null; this.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNDAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2YxZjVmOSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzk0YTNiOCIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyMDUiIHk9IjEzMCIgd2lkdGg9IjkwIiBoZWlnaHQ9IjEwMCIgcng9IjI2Ii8+PHBhdGggZD0iTTIyNSAxMzBsNi0zNmgzOGw2IDM2TTIyNSAyMzBsNiAzNmgzOGw2LTM2Ii8+PHBhdGggZD0iTTI1MCAxNjB2MjhsMTggMTAiLz48L2c+PC9zdmc+'; }; if (im) { im.classList.add('cursor-pointer'); im.onclick = () => openDetail(p.id); } const h3 = c.querySelector('h3'); if (h3) { h3.classList.add('cursor-pointer'); h3.onclick = () => openDetail(p.id); }
+                if (im) im.onerror = function () { this.onerror = null; this.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNDAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2YxZjVmOSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzk0YTNiOCIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyMDUiIHk9IjEzMCIgd2lkdGg9IjkwIiBoZWlnaHQ9IjEwMCIgcng9IjI2Ii8+PHBhdGggZD0iTTIyNSAxMzBsNi0zNmgzOGw2IDM2TTIyNSAyMzBsNiAzNmgzOGw2LTM2Ii8+PHBhdGggZD0iTTI1MCAxNjB2MjhsMTggMTAiLz48L2c+PC9zdmc+'; }; if (im) { im.loading = 'lazy'; im.classList.add('cursor-pointer'); im.onclick = () => openDetail(p.id); } const h3 = c.querySelector('h3'); if (h3) { h3.classList.add('cursor-pointer'); h3.onclick = () => openDetail(p.id); }
                 const box = c.querySelector('.relative'); if (p.best) box.insertAdjacentHTML('beforeend', '<span class="absolute bottom-3 left-3 bg-amber-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg">🔥 الأكثر مبيعاً</span>');
                 if (p.stock <= 0) {
                     box.insertAdjacentHTML('beforeend', '<div class="absolute inset-0 bg-slate-900/60 flex items-center justify-center text-white font-black">نفد المخزون</div>');
@@ -662,7 +666,7 @@
             const q = g('trackQ').value.trim().replace('#', ''), r = g('trackResult');
             const o = JSON.parse(localStorage.getItem('hanzal_orders') || '[]').find(x => x.id.replace('#', '') === q || x.phone === q);
             if (!q || !o) { r.innerHTML = '<p class="text-center text-sm text-red-600 py-4">لم يتم العثور على طلب بهذا الرقم</p>'; return; }
-            const S = ['قيد المراجعة', 'قيد التجهيز', 'تم إصدار بوليصة الشحن', 'تم الشحن', 'تم التسليم'], i = S.indexOf(o.status);
+            const S = ['قيد المراجعة', 'تم التأكيد بالاتصال', 'قيد التجهيز', 'تم إصدار بوليصة الشحن', 'تم الشحن', 'تم التسليم'], i = S.indexOf(o.status);
             r.innerHTML = `<div class="bg-slate-50 rounded-xl p-3 text-xs space-y-1"><div class="flex justify-between"><b>الطلب ${o.id}</b><b class="text-indigo-600">${o.total}</b></div><p class="text-slate-500">${o.date || ''} ${o.bostaRef ? '• ' + o.bostaRef : ''}</p>${(o.items || []).map(x => `<p>${x.name} × ${x.qty}</p>`).join('')}</div>` +
               (o.status === 'ملغي' ? '<p class="bg-red-100 text-red-700 text-sm font-bold text-center rounded-xl py-2 mt-3">تم إلغاء هذا الطلب</p>' :
               `<div class="mt-4 space-y-3">${S.map((s, k) => `<div class="flex items-center gap-3 text-sm ${k <= i ? 'text-slate-900 font-bold' : 'text-slate-400'}"><span class="w-6 h-6 rounded-full flex items-center justify-center text-xs ${k <= i ? 'bg-emerald-600 text-white' : 'bg-slate-200'}">${k <= i ? '✓' : k + 1}</span>${s}</div>`).join('')}</div>`);
@@ -716,7 +720,7 @@
             localStorage.setItem('hanzal_orders', JSON.stringify(orders));
             g('custCoupon').value = ''; showSuccess(o);
         };
-        if (cloudOn()) cGet('settings').then(d => { if (d) { localStorage.setItem('hanzal_settings', JSON.stringify(d)); renderSocial(); } }).catch(() => {});
+        if (cloudOn()) cGet('settings').then(d => { if (d) { localStorage.setItem('hanzal_settings', JSON.stringify(d)); renderSocial(); if (window.applyBar) applyBar(); } }).catch(() => {});
 
         // ===== إضافات 5: رابط المنتج + صور وألوان + عروض الكمية + PWA =====
         let dSel = '';
@@ -830,7 +834,7 @@
                 const n = orders.length; _so6(e);
                 if (orders.length === n) return;
                 const o = orders[0];
-                fetch(NOTIFY_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ id: o.id, name: o.name, phone: o.phone, address: o.address, gov: o.gov, coupon: o.coupon || '', total: o.total, subtotal: o.subtotal, shipping: o.shipping, discount: o.discount, items: o.items }) }).catch(() => {});
+                fetch(NOTIFY_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ id: o.id, name: o.name, phone: o.phone, address: o.address, gov: o.gov, coupon: o.coupon || '', total: o.total, subtotal: o.subtotal, shipping: o.shipping, discount: o.discount, items: o.items, pay: window._pay || null }) }).catch(() => {});
             };
         }
 
@@ -965,8 +969,8 @@
         async function acGo() {
             const e = g('acE').value.trim(), p = g('acP').value, m = g('acMsg'); m.textContent = '';
             try {
-                if (acTab === 'up') { const nm = g('acN').value.trim(), d = await idt('signUp', { email: e, password: p, returnSecureToken: true }), pr = { name: nm, phone: '', address: '' }; keepCust(d, pr); await cdb('PUT', 'users/' + d.localId + '/profile', pr).catch(() => {}); }
-                else { const d = await idt('signInWithPassword', { email: e, password: p, returnSecureToken: true }); keepCust(d, null); try { const pr = await cdb('GET', 'users/' + d.localId + '/profile'); if (pr) keepCust(d, pr); } catch (x) {} }
+                if (acTab === 'up') { const nm = g('acN').value.trim(), d = await idt('signUp', { email: e, password: p, returnSecureToken: true }), pr = { name: nm, phone: '', address: '', email: e }; keepCust(d, pr); await cdb('PUT', 'users/' + d.localId + '/profile', pr).catch(() => {}); }
+                else { const d = await idt('signInWithPassword', { email: e, password: p, returnSecureToken: true }); keepCust(d, null); try { let pr = await cdb('GET', 'users/' + d.localId + '/profile'); if (!pr || !pr.email) { pr = { name: '', phone: '', address: '', ...(pr || {}), email: d.email }; await cdb('PUT', 'users/' + d.localId + '/profile', pr); } keepCust(d, pr); } catch (x) {} }
                 renderAcct();
             } catch (x) { m.textContent = acErr(x.message); }
         }
@@ -976,7 +980,7 @@
         }
         async function acSave() {
             const c = cust(); if (!c) return;
-            const pr = { name: g('acN').value.trim(), phone: g('acPh').value.trim(), address: g('acAd').value.trim() };
+            const pr = { name: g('acN').value.trim(), phone: g('acPh').value.trim(), address: g('acAd').value.trim(), email: c.email };
             try { await cdb('PUT', 'users/' + c.uid + '/profile', pr); c.profile = pr; setCust(c); alert('تم الحفظ ✓'); } catch (x) { alert('تعذر الحفظ'); }
         }
         function acOut() { setCust(null); renderAcct(); }
@@ -1006,6 +1010,111 @@
             const o = orders[0], c = cust();
             if (c) cdb('PUT', 'users/' + c.uid + '/orders/' + okey(o), { id: o.id, total: o.total, date: o.date || '' }).catch(() => {});
         };
+
+        // ===== إضافات 10: الدفع بفودافون كاش وإنستا باي =====
+        const payMethod = () => (document.querySelector('input[name="payM"]:checked') || {}).value || 'cod';
+        g('ckSummary').insertAdjacentHTML('beforebegin', '<div id="payBox" class="space-y-2"></div>');
+        function payUI(total) {
+            const st = getSettings(), box = g('payBox'); if (!box) return;
+            const opts = [['cod', 'الدفع عند الاستلام']]; if (st.vc) opts.push(['vodafone', 'فودافون كاش']); if (st.ip) opts.push(['instapay', 'إنستا باي']);
+            if (opts.length < 2) { box.innerHTML = ''; return; }
+            const cur = payMethod(), sel = opts.some(o => o[0] === cur) ? cur : 'cod', pf = g('payFrom') ? g('payFrom').value : '', pr = g('payRef') ? g('payRef').value : '';
+            box.innerHTML = '<p class="text-xs font-bold text-slate-700">طريقة الدفع</p>' + opts.map(([k, n]) => `<label class="flex items-center gap-2 border rounded-xl p-3 text-sm cursor-pointer ${k === sel ? 'border-indigo-600 bg-indigo-50' : ''}"><input type="radio" name="payM" value="${k}" ${k === sel ? 'checked' : ''} onchange="calcCheckout()"> ${n}</label>`).join('')
+                + (sel === 'cod' ? '' : `<div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs space-y-2"><p>حوّل <b>${total} ج.م</b> ${sel === 'vodafone' ? 'على رقم فودافون كاش:' : 'على حساب إنستا باي:'}</p><p class="font-black text-base" dir="ltr">${escH(sel === 'vodafone' ? st.vc : st.ip)} <button type="button" onclick="copyPay()" class="text-xs bg-white border rounded-lg px-2 py-0.5 font-bold">نسخ</button></p><input id="payFrom" value="${escH(pf)}" placeholder="${sel === 'vodafone' ? 'رقم المحفظة اللي حوّلت منها' : 'الحساب اللي حوّلت منه'}" class="w-full border rounded-xl p-2.5 text-sm"><input id="payRef" value="${escH(pr)}" placeholder="رقم العملية (اختياري)" class="w-full border rounded-xl p-2.5 text-sm"><p class="text-slate-500">سيتم تأكيد طلبك بعد استلام التحويل</p></div>`);
+        }
+        function copyPay() { const st = getSettings(), v = payMethod() === 'vodafone' ? st.vc : st.ip; if (navigator.clipboard) navigator.clipboard.writeText(v).then(() => alert('تم نسخ الرقم ✓')); }
+        const _cc = calcCheckout; calcCheckout = function (n) { const r = _cc(n); payUI(r.total); return r; };
+        const _soP = submitOrder;
+        submitOrder = function (e) {
+            const pm = payMethod(), pf = g('payFrom') ? g('payFrom').value.trim() : '', pr = g('payRef') ? g('payRef').value.trim() : '';
+            if (pm !== 'cod' && pf.length < 4) { e.preventDefault(); return alert('اكتب رقم المحفظة أو الحساب اللي حوّلت منه'); }
+            window._pay = pm === 'cod' ? null : { m: pm, from: pf.slice(0, 40), ref: pr.slice(0, 40) };
+            const n = orders.length; _soP(e);
+            if (orders.length === n) return;
+            const o = orders[0]; o.payMethod = pm; o.payFrom = pf.slice(0, 40); o.payRef = pr.slice(0, 40); o.payStatus = pm === 'cod' ? 'عند الاستلام' : 'بانتظار التأكيد';
+            localStorage.setItem('hanzal_orders', JSON.stringify(orders));
+        };
+        // حفظ بيانات العميل: الإيميل في الملف الشخصي (عشان تظهر في لوحة الإدارة)
+        // ===== إضافات 11: حظر أرقام + سلات متروكة + شريط الإعلان من الإعدادات =====
+        (function () {
+            const nph = p => String(p).replace(/\D/g, '').slice(-10);
+            const vid = () => { let v = localStorage.getItem('hz_vid'); if (!v) { v = Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4); localStorage.setItem('hz_vid', v); } return v; };
+            const cartUrl = () => CLOUD.db.replace(/\/$/, '') + '/carts/' + vid() + '.json';
+            const _soB = submitOrder;
+            submitOrder = function (e) {
+                const ph = nph(g('custPhone').value);
+                if (getSettings().black.split('\n').map(nph).filter(Boolean).includes(ph)) { e.preventDefault(); return alert('عذراً، لا يمكن إتمام هذا الطلب. تواصل معنا عبر واتساب.'); }
+                const n = orders.length; _soB(e);
+                if (orders.length !== n && cloudOn()) fetch(cartUrl(), { method: 'DELETE' }).catch(() => {});
+            };
+            let t;
+            g('custPhone').addEventListener('input', () => {
+                clearTimeout(t);
+                t = setTimeout(() => {
+                    const ph = g('custPhone').value.trim().replace(/\s/g, '');
+                    if (!cloudOn() || !cart.length || !/^(\+?20|0)?1[0125]\d{8}$/.test(ph)) return;
+                    const nm = document.getElementById('custName'), c = calcCheckout();
+                    fetch(cartUrl(), { method: 'PUT', keepalive: true, body: JSON.stringify({ ph, nm: nm ? nm.value.trim().slice(0, 40) : '', t: Date.now(), tot: c.total, it: cart.slice(0, 10).map(i => (i.name + (i.color ? ' (' + i.color + ')' : '')).slice(0, 60) + ' × ' + i.qty) }) }).catch(() => {});
+                }, 1500);
+            });
+            window.applyBar = function () {
+                const st = getSettings(), bar = document.body.firstElementChild, tm = g('countdown-timer'); if (!bar || !tm) return;
+                if (st.bar === 'off') { bar.style.display = 'none'; return; } bar.style.display = '';
+                const sp = bar.querySelector('span'); if (st.bar && sp) sp.textContent = st.bar;
+                let bt = g('barTimer'); if (!bt) { tm.insertAdjacentHTML('afterend', '<span id="barTimer" class="bg-black/30 px-2 py-0.5 rounded font-mono hidden"></span>'); bt = g('barTimer'); }
+                clearInterval(window.__bt);
+                if (+st.barEnd > 0) {
+                    tm.style.display = 'none'; bt.classList.remove('hidden');
+                    const tick = () => { const s = Math.floor((+st.barEnd - Date.now()) / 1000); if (s <= 0) { bt.classList.add('hidden'); clearInterval(window.__bt); return; } const d = Math.floor(s / 86400); bt.textContent = (d ? d + ' يوم ' : '') + [s % 86400 / 3600, s % 3600 / 60, s % 60].map(v => String(Math.floor(v)).padStart(2, '0')).join(':'); };
+                    tick(); window.__bt = setInterval(tick, 1000);
+                } else { tm.style.display = ''; bt.classList.add('hidden'); }
+            };
+            applyBar();
+        })();
+
+        // ===== إضافات 12: أعلمني عند التوفر + خصم ترحيبي + دليل المقاسات + خيارات نفدت + بيانات جوجل =====
+        (function () {
+            const sold = p => p.soldOut || [], PH = /^(\+?20|0)?1[0125]\d{8}$/, db = () => CLOUD.db.replace(/\/$/, '');
+            const rid = () => Date.now() + Math.random().toString(36).slice(2, 5);
+            const _odN = openDetail;
+            openDetail = function (id) {
+                _odN(id);
+                const p = fresh().find(x => x.id === id), body = g('detailBody'); if (!p || !body || !body.firstElementChild) return;
+                body.querySelectorAll('.colorBtn,.sizeBtn').forEach(b => { const v = decodeURIComponent(b.dataset.c || b.dataset.s || ''); if (sold(p).includes(v)) { b.disabled = true; b.classList.add('opacity-40', 'line-through'); } });
+                if (p.sizeGuide) body.firstElementChild.insertAdjacentHTML('afterend', `<details class="mx-6 mb-3 text-xs bg-slate-50 rounded-xl p-3"><summary class="font-bold cursor-pointer">دليل المقاسات</summary><p class="mt-2 text-slate-600 whitespace-pre-line">${escH(p.sizeGuide)}</p></details>`);
+                if (p.stock <= 0) body.firstElementChild.insertAdjacentHTML('afterend', `<div class="mx-6 mb-3 bg-amber-50 rounded-xl p-3 space-y-2"><p class="text-xs font-bold text-amber-800">المنتج غير متوفر حالياً — اترك رقمك ونبلّغك أول ما يرجع</p><div class="flex gap-2"><input id="nmPh" type="tel" placeholder="رقم الموبايل" class="flex-1 border rounded-xl p-2 text-sm"><button onclick="notifyMe(${p.id})" class="bg-slate-900 text-white text-xs px-4 rounded-xl font-bold">أعلمني</button></div></div>`);
+                let el = document.getElementById('ldProduct'); if (!el) { el = document.createElement('script'); el.type = 'application/ld+json'; el.id = 'ldProduct'; document.head.appendChild(el); }
+                el.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: p.nameEn || p.name, image: p.image && !String(p.image).startsWith('data:') ? [p.image, ...(p.images || [])] : undefined, description: p.specsEn || p.specs || p.name, brand: { '@type': 'Brand', name: STORE.nameEn || STORE.name }, offers: { '@type': 'Offer', priceCurrency: 'EGP', price: p.price, availability: p.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock', url: location.origin + location.pathname + '#p' + p.id } });
+            };
+            const _avS = addVariant;
+            addVariant = function (id, v) {
+                const p = fresh().find(x => x.id === id);
+                if (p && v && (sold(p).includes(v) || v.split(' / ').some(x => sold(p).includes(x)))) return alert('هذا الخيار غير متوفر حالياً');
+                _avS(id, v);
+            };
+            window.notifyMe = function (pid) {
+                const ph = (g('nmPh').value || '').trim().replace(/\s/g, '');
+                if (!PH.test(ph)) return alert('من فضلك أدخل رقم موبايل مصري صحيح (مثال: 01012345678)');
+                if (!cloudOn()) return alert('الخدمة غير متاحة حالياً');
+                if (localStorage.getItem('hz_nm_' + pid)) return alert('تم تسجيل رقمك بالفعل لهذا المنتج ✓');
+                fetch(db() + '/notify/' + pid + '/' + rid() + '.json', { method: 'PUT', body: JSON.stringify({ ph, t: Date.now() }) }).then(x => { if (!x.ok) throw 0; localStorage.setItem('hz_nm_' + pid, '1'); alert('تم تسجيل رقمك ✓ هنبلّغك أول ما يرجع المنتج'); }).catch(() => alert('حصل خطأ، حاول مرة تانية'));
+            };
+            window.wcGet = function () {
+                const ph = (g('wcPh').value || '').trim().replace(/\s/g, '');
+                if (!PH.test(ph)) return alert('من فضلك أدخل رقم موبايل مصري صحيح (مثال: 01012345678)');
+                const st = getSettings();
+                fetch(db() + '/leads/' + rid() + '.json', { method: 'PUT', body: JSON.stringify({ ph, t: Date.now() }) }).catch(() => {});
+                localStorage.setItem('hz_coupon', st.wcode);
+                g('pageBody').innerHTML = `<div class="text-center space-y-3"><div class="text-4xl">🎉</div><h3 class="font-black text-lg">كود الخصم الخاص بك</h3><div class="bg-slate-100 rounded-xl py-3 text-2xl font-black tracking-widest" dir="ltr">${escH(st.wcode)}</div><p class="text-xs text-slate-500">هيتحط تلقائياً في نافذة الطلب</p><button onclick="hide('pageModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold">كمّل التسوق</button></div>`;
+            };
+            setTimeout(() => {
+                const st = getSettings(); if (!st.wcode || localStorage.getItem('hz_welcome') || !cloudOn()) return;
+                g('pageBody').innerHTML = `<div class="text-center space-y-3"><div class="text-4xl">🎁</div><h3 class="font-black text-lg">${escH(st.wmsg || 'خصم ترحيبي لك!')}</h3><p class="text-xs text-slate-500">اترك رقم واتساب واحصل على كود الخصم فوراً</p><input id="wcPh" type="tel" placeholder="01xxxxxxxxx" class="w-full border rounded-xl p-3 text-sm text-center"><button onclick="wcGet()" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold">احصل على الكود</button><p class="text-[10px] text-slate-400">بإرسال رقمك توافق على تواصل المتجر معك بالعروض.</p></div>`;
+                show('pageModal'); localStorage.setItem('hz_welcome', '1');
+            }, 8000);
+            const _ocW = openCheckoutModal;
+            openCheckoutModal = function () { _ocW(); const cp = localStorage.getItem('hz_coupon'), el = g('custCoupon'); if (cp && el && !el.value) { el.value = cp; calcCheckout(); } };
+        })();
 
         // ===== السحابة =====
         if (cloudOn()) {
