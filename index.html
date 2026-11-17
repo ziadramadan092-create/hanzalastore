@@ -15,37 +15,7 @@
     <script src="cloud.js"></script>
     <link id="twcss" rel="stylesheet" href="tailwind.css">
     <script>
-        function sendOrderToTelegram() {
-    // جلب بيانات العميل من الحقول الموجودة في الصفحة (تأكد أن الـ IDs تطابق حقول موقعك)
-    const customerName = document.getElementById('customer-name').value;
-    const customerPhone = document.getElementById('customer-phone').value;
-    const customerAddress = document.getElementById('customer-address').value;
-
-    // تجهيز نص الرسالة التي ستصلك على تيليجرام
-    const orderMessage = `🛒 طلب جديد من متجر حنظلة ستور!\n\n` +
-                         `👤 الاسم: ${customerName}\n` +
-                         `📞 الهاتف: ${customerPhone}\n` +
-                         `📍 العنوان: ${customerAddress}`;
-
-    // رابط الـ Web App الخاص بجوجل سكريبت
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwW6x7jXxsRTJ4SsSDYMcG_GsepCXlrofTP2yv8lTMEHw57FuPqwnMz_gZWT1ti3_BF/exec";
-
-    // إرسال البيانات عبر fetch
-    fetch(scriptURL, {
-        method: "POST",
-        mode: "no-cors", // لتجنب مشاكل الـ CORS في المتصفح
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: orderMessage })
-    })
-    .then(response => {
-        alert("تم إرسال الطلب بنجاح! سيتم التواصل معك قريباً.");
-        // يمكن هنا تفريغ السلة أو إعادة توجيه العميل
-    })
-    .catch(error => {
-        console.error("Error!", error.message);
-        alert("حدث خطأ أثناء إرسال الطلب، حاول مرة أخرى.");
-    });
-}
+  
     (function () {
         var l = document.getElementById('twcss'), done = false;
         function ok() { var d = document.createElement('div'); d.className = 'hidden'; document.documentElement.appendChild(d); var r = getComputedStyle(d).display === 'none'; d.remove(); return r; }
