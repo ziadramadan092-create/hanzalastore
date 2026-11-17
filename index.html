@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="حنظلة ستور - ساعات ذكية وسماعات وشواحن أصلية، توصيل لكل محافظات مصر والدفع عند الاستلام">
     <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="manifest" href="manifest.json">
     <meta property="og:type" content="website"><meta property="og:title" content="حنظلة ستور | Hanzala Store"><meta property="og:description" content="إكسسوارات الموبايل والساعات الذكية - توصيل لكل المحافظات والدفع عند الاستلام"><meta property="og:image" content="https://hanzalastore.netlify.app/logo-512.png">
     <meta name="theme-color" content="#4338ca">
     <link rel="apple-touch-icon" href="logo-192.png">
     <title>حنظلة ستور | Hanzala Store - ساعات ذكية وسماعات وإكسسوارات</title>
     <script src="cloud.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="tailwind.css" onerror="var s=document.createElement('script');s.src='https://cdn.tailwindcss.com';document.head.appendChild(s)">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <style>
         body { font-family: 'Cairo', sans-serif; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
@@ -617,7 +618,7 @@
             [...g('productsGrid').children].forEach((c, i) => {
                 const p = items[i]; if (!p) return;
                 const im = c.querySelector('img');
-                if (im) im.onerror = function () { this.onerror = null; this.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNDAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2YxZjVmOSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzk0YTNiOCIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyMDUiIHk9IjEzMCIgd2lkdGg9IjkwIiBoZWlnaHQ9IjEwMCIgcng9IjI2Ii8+PHBhdGggZD0iTTIyNSAxMzBsNi0zNmgzOGw2IDM2TTIyNSAyMzBsNiAzNmgzOGw2LTM2Ii8+PHBhdGggZD0iTTI1MCAxNjB2MjhsMTggMTAiLz48L2c+PC9zdmc+'; }; if (im) { im.loading = 'lazy'; im.classList.add('cursor-pointer'); im.onclick = () => openDetail(p.id); } const h3 = c.querySelector('h3'); if (h3) { h3.classList.add('cursor-pointer'); h3.onclick = () => openDetail(p.id); }
+                if (im) im.onerror = function () { this.onerror = null; this.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNDAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2YxZjVmOSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzk0YTNiOCIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyMDUiIHk9IjEzMCIgd2lkdGg9IjkwIiBoZWlnaHQ9IjEwMCIgcng9IjI2Ii8+PHBhdGggZD0iTTIyNSAxMzBsNi0zNmgzOGw2IDM2TTIyNSAyMzBsNiAzNmgzOGw2LTM2Ii8+PHBhdGggZD0iTTI1MCAxNjB2MjhsMTggMTAiLz48L2c+PC9zdmc+'; }; if (im) { im.loading = 'lazy'; im.decoding = 'async'; im.classList.add('cursor-pointer'); im.onclick = () => openDetail(p.id); } const h3 = c.querySelector('h3'); if (h3) { h3.classList.add('cursor-pointer'); h3.onclick = () => openDetail(p.id); }
                 const box = c.querySelector('.relative'); if (p.best) box.insertAdjacentHTML('beforeend', '<span class="absolute bottom-3 left-3 bg-amber-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg">🔥 الأكثر مبيعاً</span>');
                 if (p.stock <= 0) {
                     box.insertAdjacentHTML('beforeend', '<div class="absolute inset-0 bg-slate-900/60 flex items-center justify-center text-white font-black">نفد المخزون</div>');
@@ -1043,7 +1044,7 @@
             const _soB = submitOrder;
             submitOrder = function (e) {
                 const ph = nph(g('custPhone').value);
-                if (getSettings().black.split('\n').map(nph).filter(Boolean).includes(ph)) { e.preventDefault(); return alert('عذراً، لا يمكن إتمام هذا الطلب. تواصل معنا عبر واتساب.'); }
+                if ((getSettings().black || '').split('\n').map(nph).filter(Boolean).includes(ph)) { e.preventDefault(); return alert('عذراً، لا يمكن إتمام هذا الطلب. تواصل معنا عبر واتساب.'); }
                 const n = orders.length; _soB(e);
                 if (orders.length !== n && cloudOn()) fetch(cartUrl(), { method: 'DELETE' }).catch(() => {});
             };
@@ -1114,6 +1115,28 @@
             }, 8000);
             const _ocW = openCheckoutModal;
             openCheckoutModal = function () { _ocW(); const cp = localStorage.getItem('hz_coupon'), el = g('custCoupon'); if (cp && el && !el.value) { el.value = cp; calcCheckout(); } };
+        })();
+
+        // ===== إضافات 13: إرسال الطلب على واتساب مباشرة + صور أخف =====
+        (function () {
+            const PM = { cod: 'الدفع عند الاستلام', vc: 'فودافون كاش', ip: 'إنستا باي' };
+            function orderText(o) {
+                const L = ['🛒 طلب جديد ' + o.id, 'الاسم: ' + o.name, 'الهاتف: ' + o.phone, 'العنوان: ' + o.address, ''];
+                (o.items || []).forEach(x => L.push('• ' + x.name + ' × ' + x.qty + ' = ' + (x.price * x.qty) + ' ج.م'));
+                L.push('', 'الشحن: ' + ((+o.shipping || 0) ? o.shipping + ' ج.م' : 'مجاني'));
+                if (+o.discount) L.push('الخصم: ' + o.discount + ' ج.م' + (o.coupon ? ' (' + o.coupon + ')' : ''));
+                if (o.payMethod) L.push('طريقة الدفع: ' + (PM[o.payMethod] || o.payMethod));
+                L.push('الإجمالي: ' + o.total);
+                return L.join('\n');
+            }
+            const _ssW = showSuccess;
+            showSuccess = function (o) {
+                _ssW(o);
+                if (STORE.autoWA === false) return;
+                try { window.open('https://wa.me/' + STORE.whatsapp + '?text=' + encodeURIComponent(orderText(o)), '_blank'); } catch (e) {}
+            };
+            const _rpO = renderProducts;
+            renderProducts = function (items) { _rpO((items || []).map(p => p && p.image ? Object.assign({}, p, { image: optImg(p.image, 600) }) : p)); };
         })();
 
         // ===== السحابة =====
