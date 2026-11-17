@@ -61,7 +61,7 @@ const KIND = { ViewContent: 'view', AddToCart: 'cart', InitiateCheckout: 'checko
 function track(ev, d) { try { if (KIND[ev]) logVisit(KIND[ev], { pid: d && d.content_ids ? (+d.content_ids[0] || 0) : 0 }); if (window.fbq && PIXELS.meta) fbq('track', ev, d); if (window.gtag && PIXELS.ga) gtag('event', GA_EV[ev] || ev, d); } catch (e) {} }
 
 // رابط إشعار تليجرام (من Google Apps Script - اقرأ telegram-notify.gs). اتركه فاضي لو مش مستخدمه
-const NOTIFY_URL = 'https://script.google.com/macros/s/AKfycbylL4O8ZN9XDh-Mu3dMmv2v812lDKG7wTGuNQgZ1leiA7zUWH8hJJxkYQbba4S2FA1U/exec';
+const NOTIFY_URL = 'https://script.google.com/macros/s/AKfycbwEK1kKVKPDzdyG8MbmuWm580z2X2T9DQylK78y49M/dev';
 
 // Firebase بيرجّع القوائم أحياناً بعنصر فاضي (null) في الأول: نتجاهله دايماً
 const cList = d => (Array.isArray(d) ? d : Object.values(d || {})).filter(Boolean);
