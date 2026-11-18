@@ -6,15 +6,18 @@
     <title>لوحة التحكم - حنظلة ستور | Hanzala Store</title>
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <script>if (localStorage.getItem('hanzal_is_logged_in') !== 'true') location.replace('login.html');</script>
+    <script src="config.js"></script>
     <script src="cloud.js"></script>
-    <link id="twcss" rel="stylesheet" href="tailwind.css">
     <script>
     (function () {
-        var l = document.getElementById('twcss'), done = false;
-        function ok() { var d = document.createElement('div'); d.className = 'hidden'; document.documentElement.appendChild(d); var r = getComputedStyle(d).display === 'none'; d.remove(); return r; }
-        function cdn() { if (done) return; done = true; var s = document.createElement('script'); s.src = 'https://cdn.tailwindcss.com'; document.head.appendChild(s); }
-        function check() { if (!ok()) cdn(); }
-        l.onload = check; l.onerror = cdn; window.addEventListener('load', check);
+        // الافتراضي: Tailwind من الإنترنت (زي ما كان). لو فعّلت USE_BUILT_CSS في cloud.js بيحمّل tailwind.css مع فحص وفولباك.
+        if (!window.USE_BUILT_CSS) { document.write('<script src="https://cdn.tailwindcss.com"><\/script>'); return; }
+        document.write('<link rel="stylesheet" href="tailwind.css">');
+        window.addEventListener('load', function () {
+            var d = document.createElement('div'); d.className = 'hidden'; document.documentElement.appendChild(d);
+            var good = getComputedStyle(d).display === 'none'; d.remove();
+            if (!good) { var s = document.createElement('script'); s.src = 'https://cdn.tailwindcss.com'; document.head.appendChild(s); }
+        });
     })();
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -400,9 +403,8 @@ async function migrateImages() {
     render(); alert(n ? 'تم نقل ' + n + ' صورة إلى Cloudinary ✓' : 'مفيش صور محتاجة نقل');
 }
 function testNotify() {
-    if (!NOTIFY_URL) return alert('ضع رابط Apps Script في NOTIFY_URL داخل cloud.js الأول');
-    fetch(NOTIFY_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ id: '#TEST' + Date.now().toString().slice(-4), name: 'اختبار', phone: '01000000000', address: 'اختبار الإشعار', gov: '', coupon: '', total: '0 ج.م', subtotal: 0, shipping: 0, discount: 0, items: [] }) })
-        .then(() => alert('اتبعت الاختبار. افتح تليجرام وشوف الرسالة وصلت ولا لأ')).catch(() => alert('فشل الإرسال، راجع الرابط'));
+    if (!NOTIFY_URL) return alert('ضع رابط Apps Script في NOTIFY_URL داخل config.js الأول');
+    window.open(NOTIFY_URL + (NOTIFY_URL.includes('?') ? '&' : '?') + 'test=1', '_blank');
 }
 
 // ===== إحصائيات الزوار =====
