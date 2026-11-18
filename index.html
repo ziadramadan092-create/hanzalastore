@@ -11,15 +11,18 @@
     <meta name="theme-color" content="#4338ca">
     <link rel="apple-touch-icon" href="logo-192.png">
     <title>حنظلة ستور | Hanzala Store - ساعات ذكية وسماعات وإكسسوارات</title>
+    <script src="config.js"></script>
     <script src="cloud.js"></script>
-    <link id="twcss" rel="stylesheet" href="tailwind.css">
     <script>
     (function () {
-        var l = document.getElementById('twcss'), done = false;
-        function ok() { var d = document.createElement('div'); d.className = 'hidden'; document.documentElement.appendChild(d); var r = getComputedStyle(d).display === 'none'; d.remove(); return r; }
-        function cdn() { if (done) return; done = true; var s = document.createElement('script'); s.src = 'https://cdn.tailwindcss.com'; document.head.appendChild(s); }
-        function check() { if (!ok()) cdn(); }
-        l.onload = check; l.onerror = cdn; window.addEventListener('load', check);
+        // الافتراضي: Tailwind من الإنترنت (زي ما كان). لو فعّلت USE_BUILT_CSS في cloud.js بيحمّل tailwind.css مع فحص وفولباك.
+        if (!window.USE_BUILT_CSS) { document.write('<script src="https://cdn.tailwindcss.com"><\/script>'); return; }
+        document.write('<link rel="stylesheet" href="tailwind.css">');
+        window.addEventListener('load', function () {
+            var d = document.createElement('div'); d.className = 'hidden'; document.documentElement.appendChild(d);
+            var good = getComputedStyle(d).display === 'none'; d.remove();
+            if (!good) { var s = document.createElement('script'); s.src = 'https://cdn.tailwindcss.com'; document.head.appendChild(s); }
+        });
     })();
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -292,7 +295,8 @@
                     <label class="block text-xs font-bold text-slate-700 mb-1">العنوان</label>
                     <textarea id="custAddress" required rows="2" class="w-full border rounded-xl p-2.5 text-sm outline-none"></textarea>
                 </div>
-                <button type="submit" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold">إرسال الطلب</button>
+                <button type="submit" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold">تأكيد الطلب</button>
+                    <button type="button" onclick="submitWithWA()" class="w-full bg-[#25D366] hover:bg-[#1ebe5b] text-white py-3 rounded-xl font-bold mt-2"><i class="fa-brands fa-whatsapp"></i> إرسال الطلب على واتساب (اختياري)</button>
             </form>
         </div>
     </div>
@@ -1141,8 +1145,16 @@
             const _ssW = showSuccess;
             showSuccess = function (o) {
                 _ssW(o);
-                if (STORE.autoWA === false) return;
+                if (!window.__waOpt) return;
                 try { window.open('https://wa.me/' + STORE.whatsapp + '?text=' + encodeURIComponent(orderText(o)), '_blank'); } catch (e) {}
+            };
+            const _soW = submitOrder;
+            submitOrder = function (e) { window.__waOpt = !!window.__waNext; window.__waNext = false; _soW(e); };
+            window.submitWithWA = function () {
+                const f = document.querySelector('#checkoutModal form'); if (!f) return;
+                window.__waNext = true;
+                if (f.requestSubmit) f.requestSubmit(); else f.dispatchEvent(new Event('submit', { cancelable: true }));
+                window.__waNext = false;
             };
             const _rpO = renderProducts;
             renderProducts = function (items) { _rpO((items || []).map(p => p && p.image ? Object.assign({}, p, { image: optImg(p.image, 600) }) : p)); };
